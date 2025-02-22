@@ -1,0 +1,85 @@
+<Project>
+  <!-- Solution-wide settings -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <!-- Lambda-specific settings (only applied to lambda projects) -->
+  <PropertyGroup Condition="$(MSBuildProjectDirectory.Contains('Lambdas'))">
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <PublishDir>publish</PublishDir>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
+  </PropertyGroup>
+
+  <!-- Common packages for all projects -->
+  <ItemGroup>
+    <!-- AWS Core -->
+    <PackageReference Include="AWSSDK.Core" Version="3.7.304.12" />
+    <PackageReference Include="Amazon.Lambda.Core" Version="2.5.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.4.4" />
+    <PackageReference Include="Amazon.Lambda.Logging.AspNetCore" Version="3.1.1" />
+    
+    <!-- AWS Services -->
+    <PackageReference Include="AWSSDK.SimpleNotificationService" Version="3.7.301.14" />
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.301.14" />
+    <PackageReference Include="AWSSDK.StepFunctions" Version="3.7.302" />
+    
+    <!-- Web/API -->
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    
+    <!-- Validation -->
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+  </ItemGroup>
+
+  <!-- Lambda-specific packages (only applied to lambda projects) -->
+  <ItemGroup Condition="$(MSBuildProjectDirectory.Contains('Lambdas'))">
+    <!-- AWS Core -->
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.300" />
+    
+    <!-- Lambda packages -->
+    <PackageReference Include="AWSSDK.Lambda" Version="3.7.303.34" />
+    
+    <!-- Lambda Events -->
+    <PackageReference Include="Amazon.Lambda.SQSEvents" Version="2.2.0" />
+    <PackageReference Include="Amazon.Lambda.SNSEvents" Version="2.1.0" />
+    
+    <!-- Storage -->
+    <PackageReference Include="StackExchange.Redis" Version="2.7.17" />
+
+    <!-- Lambda project references -->
+    <ProjectReference Include="../../API.csproj" />
+  </ItemGroup>
+
+  <!-- Common usings for all projects -->
+  <ItemGroup>
+    <Using Include="System" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System.Net.Http" />
+    <Using Include="System.Threading.Tasks" />
+    <Using Include="Microsoft.Extensions.DependencyInjection" />
+    <Using Include="Microsoft.Extensions.Logging" />
+    <Using Include="Microsoft.Extensions.Configuration" />
+  </ItemGroup>
+
+  <!-- Test exclusions for lambda projects -->
+  <ItemGroup Condition="$(MSBuildProjectDirectory.Contains('Lambdas'))">
+    <Content Remove="Tests\**" />
+    <Compile Remove="Tests\**" />
+    <EmbeddedResource Remove="Tests\**" />
+    <None Remove="Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+</Project> 

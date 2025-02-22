@@ -1,0 +1,14 @@
+<Project>
+  <Import Project="../Directory.Build.props" />
+  
+  <!-- Lambda-specific settings -->
+  <PropertyGroup>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <AWSProjectType>Lambda</AWSProjectType>
+    <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../API.csproj" />
+  </ItemGroup>
+</Project> 

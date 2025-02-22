@@ -1,0 +1,69 @@
+# IDE and Editor Files
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.DS_Store
+Thumbs.db
+
+# # Build and Binary Outputs
+**/bin/
+**/obj/
+**/.sh/
+**/dist/
+!dist/.gitkeep
+*.cache
+publish/
+
+# NuGet
+packages/
+project.lock.json
+project.assets.json
+
+
+# Application Secrets and Config
+**/appsettings.json
+!**/appsettings.template.json
+
+# Keys and Certificates
+*.pem
+*.pub
+# terraform/keys/
+
+# Logs
+*.log
+logs/
+
+# Project-specific
+redis.md
+.sh/
+
+appsettings.json
+
+# Ignore everything in .terraform/
+.terraform/
+
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+
+# Allow only specific files inside the terraform directory
+!terraform/outputs.tf
+!terraform/terraform.tfvars.example
+!terraform/1-base.tf
+!terraform/2.redis.tf
+!terraform/3-lambda.tf
+!terraform/4-state-machine.tf
+
+# Ignore all other Terraform override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore crash logs
+crash.log
+crash.*.log
