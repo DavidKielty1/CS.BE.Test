@@ -42,30 +42,3 @@ appsettings.json
 
 # Ignore everything in .terraform/ (hidden directory)
 .terraform/
-
-# Ignore Terraform state files
-*.tfstate
-*.tfstate.*
-*.tfvars
-*.tfvars.json
-
-# ✅ Ensure terraform/ itself is NOT ignored
-!terraform/
-
-# ✅ Allow only specific files inside terraform/
-!terraform/outputs.tf
-!terraform/terraform.tfvars.example
-!terraform/1-base.tf
-!terraform/2.redis.tf
-!terraform/3-lambda.tf
-!terraform/4-state-machine.tf
-
-# Ignore all other Terraform override files
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-
-# Ignore crash logs
-crash.log
-crash.*.log
