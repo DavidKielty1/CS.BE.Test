@@ -7,10 +7,9 @@
 .DS_Store
 Thumbs.db
 
-# # Build and Binary Outputs
+# Build and Binary Outputs
 **/bin/
 **/obj/
-**/.sh/
 **/dist/
 !dist/.gitkeep
 *.cache
@@ -21,7 +20,6 @@ packages/
 project.lock.json
 project.assets.json
 
-
 # Application Secrets and Config
 **/appsettings.json
 !**/appsettings.template.json
@@ -29,19 +27,20 @@ project.assets.json
 # Keys and Certificates
 *.pem
 *.pub
-# terraform/keys/
+terraform/keys/
 
 # Logs
-*.log
 logs/
+logs/*
+*.log
 
 # Project-specific
 redis.md
-.sh/
+*.sh  # Ignores all shell scripts instead of .sh/ which is invalid
 
 appsettings.json
 
-# Ignore everything in .terraform/
+# Ignore everything in .terraform/ (hidden directory)
 .terraform/
 
 # Ignore Terraform state files
@@ -50,7 +49,10 @@ appsettings.json
 *.tfvars
 *.tfvars.json
 
-# Allow only specific files inside the terraform directory
+# ✅ Ensure terraform/ itself is NOT ignored
+!terraform/
+
+# ✅ Allow only specific files inside terraform/
 !terraform/outputs.tf
 !terraform/terraform.tfvars.example
 !terraform/1-base.tf
